@@ -1,0 +1,61 @@
+:root {
+  --header-height: 4em;
+  --footer-height: 2em;
+}
+
+html {
+	height: 100vh;
+	width: 100%;
+}
+
+* {
+	margin: 0;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+body {
+	box-sizing: inherit;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+}
+
+header {
+	width: 100%;
+	height: var(--header-height);
+}
+
+main {
+	width: 100%;
+	height: calc(100% - var(--header-height) - var(--footer-height));
+	overflow: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.title {
+	width: fit-content;
+	color: yellow;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.image {
+	width: 600px;
+	height: 600px;
+	margin-bottom: 12px;
+}
+
+.character-name {
+	color: yellow;
+	font-size: 24px;
+}
+
+.input-character-name {
+	margin-bottom: 12px
+}
