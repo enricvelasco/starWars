@@ -21,24 +21,52 @@ const peopleSearchUrl = 'https://swapi.dev/api/people/?search=boba';
 
 const imageBasicUrl = 'http://facetheforce.today/images/boba.jpg';
 
-function paintTextName () {
+function paintTextName (name, json) {
 	const element = document.getElementById("character-text");
-	element.innerHTML = "Boba Fett";
+	element.innerHTML = name + ' ' + json;
 };
 
-function paintImage () {
-	document.getElementById("character-image").src = "http://facetheforce.today/images/boba.jpg";
+function searchInformation (nomPersonatge) {
+	return new Promise(function (resolve){
+		fetch('https://swapi.dev/api/people/?search=' + nomPersonatge)
+			.then(function(res) {return res.json()})
+			.then(function(response) {
+				resolve(response)
+			})
+	})
+};
+
+
+
+
+
+function paintImage (nomPersonatge) {
+	document.getElementById("character-image").src = 'http://facetheforce.today/images/' + nomPersonatge + '.jpg';
 };
 
 /*---- INICIO ----*/
 
 function searchCharacter () {
 	const textValue = document.getElementById('character-input').value;
+	console.log(textValue)
 
-	paintTextName();
-	paintImage();
+	
+	//getAllPokemons().then(function(response) {}
+	searchInformation(textValue).then(function(response){
+		console.log(response.results)
+		let personatge = response.results[0]
+		paintTextName(personatge.name, JSON.stringify(personatge))
+		
+
+		/*for (let i = 0; i < response.results.length; i++) {
+			if(i === 0){
+				personatge = response.results[i]
+			}
+		}*/
+	});
 };
 
-
+paintImage("boba")
+paintTextName('STAR WARS', '')
 // cridar la funció desde aquí fà que s'executi automaticament cada cop que refresques. Si la treus veuras que has de clickar a Search perque fagi algo
-searchCharacter();
+//searchCharacter();
